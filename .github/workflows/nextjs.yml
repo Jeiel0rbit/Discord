@@ -31,20 +31,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. Configura o ambiente Node.js
+      # 2. Configura o pnpm usando a action oficial.
+      # Esta é a maneira recomendada e mais confiável de instalar o pnpm.
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      # 3. Configura o ambiente Node.js.
+      # Esta action irá detectar a versão do pnpm instalada pelo passo anterior e configurar o cache.
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          # Configura o cache para o pnpm, acelerando futuras instalações
           cache: "pnpm"
-
-      # 3. Habilita o Corepack e instala a versão mais recente do pnpm
-      # Corepack é a maneira moderna e recomendada de gerenciar gerenciadores de pacotes
-      - name: Enable and install pnpm via Corepack
-        run: |
-          corepack enable
-          corepack prepare pnpm@latest --activate
 
       # 4. Instala as dependências do projeto usando pnpm
       - name: Install dependencies
