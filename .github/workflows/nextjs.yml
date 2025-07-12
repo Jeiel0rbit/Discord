@@ -1,71 +1,99 @@
+# Nome do workflow que aparecerá na aba "Actions" do seu repositório
 name: Deploy Next.js site to Pages
 
+# Define os gatilhos que iniciarão o workflow
 on:
+  # Executa quando há um push na branch "main"
   push:
     branches: ["main"]
+  # Permite que você execute este workflow manualmente a partir da aba Actions
   workflow_dispatch:
 
+# Define as permissões necessárias para o workflow
 permissions:
   contents: read
   pages: write
   id-token: write
 
+# Configuração de concorrência para garantir que apenas um deploy execute por vez
 concurrency:
   group: "pages"
   cancel-in-progress: false
 
+# Define os jobs que serão executados
 jobs:
+  # Job para construir o site
   build:
+    # O tipo de máquina virtual para executar o job
     runs-on: ubuntu-latest
     steps:
+      # 1. Faz o checkout do seu repositório para que o workflow possa acessá-lo
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 2. Configura o ambiente Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          # Configura o cache para o pnpm, acelerando futuras instalações
           cache: "pnpm"
 
+      # 3. Habilita o Corepack e instala a versão mais recente do pnpm
+      # Corepack é a maneira moderna e recomendada de gerenciar gerenciadores de pacotes
       - name: Enable and install pnpm via Corepack
         run: |
           corepack enable
           corepack prepare pnpm@latest --activate
 
+      # 4. Instala as dependências do projeto usando pnpm
       - name: Install dependencies
         run: pnpm install
 
+      # 5. Configura o ambiente do GitHub Pages para o Next.js
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
         with:
           static_site_generator: next
 
+      # 6. Restaura o cache de build do Next.js para acelerar o processo de build
       - name: Restore Next.js build cache
         uses: actions/cache@v4
         with:
           path: .next/cache
+          # A chave de cache é baseada no sistema operacional, no lockfile do pnpm e nos arquivos do projeto
           key: ${{ runner.os }}-nextjs-${{ hashFiles('pnpm-lock.yaml') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           restore-keys: |
             ${{ runner.os }}-nextjs-
 
+      # 7. Executa o comando de build do Next.js
       - name: Build with Next.js
         run: pnpm next build
 
+      # 8. Exporta o site para arquivos estáticos (necessário para o GitHub Pages)
+      # O resultado será salvo na pasta "./out"
       - name: Export static site
         run: pnpm next export
 
+      # 9. Faz o upload do artefato (a pasta "./out") para o GitHub Pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
+  # Job para fazer o deploy do site
   deploy:
+    # Configura o ambiente de deploy para o GitHub Pages
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    # O tipo de máquina virtual para executar o job
     runs-on: ubuntu-latest
+    # Garante que o job "build" tenha sido concluído com sucesso antes de iniciar
     needs: build
     steps:
+      # 1. Faz o deploy no GitHub Pages usando o artefato gerado no job de build
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
