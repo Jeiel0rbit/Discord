@@ -1,11 +1,12 @@
 import type React from "react"
 import type { Metadata } from "next"
 import "./globals.css"
+import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Square News - Notícias de Tecnologia",
   description: "Notícias compactas de tecnologia publicadas voluntariamente",
-    generator: 'v0.dev'
+  generator: "v0.dev",
 }
 
 export default function RootLayout({
@@ -23,7 +24,10 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        <Toaster />
+      </body>
     </html>
   )
 }

@@ -11,6 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog"
 import { VisitCounter } from "@/components/visit-counter" // Import the new component
+import { DonationSection } from "@/components/donation-section"
 
 export default function HomePage() {
   return (
@@ -63,7 +64,7 @@ export default function HomePage() {
                   <div>
                     <h2 className="text-2xl md:text-3xl font-bold mb-4">Sobre o Projeto</h2>
                     <p className="text-lg md:text-xl leading-relaxed text-gray-800">
-                      <span className="font-bold">Square News</span> é um projeto voluntário publicado na{" "}
+                      <span className="font-bold">Square News</span> é um projeto voluntário que publico na{" "}
                       <span className="font-bold text-black">Square Cloud</span>, sem vínculo com empresa no momento.
                       <span className="font-bold text-black"> Meu objetivo</span> é trazer notícias compactas e
                       relevantes do mundo da tecnologia. Este trabalho é feito{" "}
@@ -110,7 +111,8 @@ export default function HomePage() {
                     </div>
                     <p className="text-gray-300 leading-relaxed">
                       Todas as notícias são coletadas e publicadas{" "}
-                      <span className="font-bold text-white">manualmente</span>, garantindo qualidade e relevância.
+                      <span className="font-bold text-white">manualmente por mim</span>, garantindo qualidade e
+                      relevância.
                     </p>
                   </div>
 
@@ -120,11 +122,12 @@ export default function HomePage() {
                       <div className="w-12 h-12 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
                         <i className="fas fa-cloud text-xl text-white"></i>
                       </div>
-                      <h3 className="text-xl font-bold">Onde eu publico:</h3>
+                      <h3 className="text-xl font-bold">Onde publico:</h3>
                     </div>
                     <p className="text-gray-300 leading-relaxed mb-4">
-                      As notícias são publicadas tanto na <span className="font-bold text-white">Square Cloud</span>{" "}
-                      quanto no servidor Discord <span className="font-bold text-white">LoFi Square</span>.
+                      Publico as notícias tanto na <span className="font-bold text-white">Square Cloud</span> quanto no
+                      servidor Discord <span className="font-bold text-white">LoFi Square</span>, onde você tem as
+                      informações mais relevantes da tecnologia.
                     </p>
                     <div className="bg-gray-700 rounded-xl p-4 border border-gray-600">
                       <h4 className="font-bold text-lg mb-2 text-blue-300">Sobre o LoFi Square:</h4>
@@ -206,17 +209,17 @@ export default function HomePage() {
                         <span className="text-gray-400 text-sm">hoje às 11:14</span>
                       </div>
                       <div className="bg-gray-900 rounded-lg p-4 border-l-4 border-blue-500">
-                        <ReactMarkdown
-                          className="text-gray-200 leading-relaxed text-lg"
-                          remarkPlugins={[remarkGfm]}
-                          components={{
-                            h2: ({ node, ...props }) => <h2 className="text-xl font-bold text-white mb-2" {...props} />,
-                            ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-1" {...props} />,
-                            li: ({ node, ...props }) => <li className="mb-1" {...props} />,
-                            p: ({ node, ...props }) => <p className="mb-2" {...props} />,
-                          }}
-                        >
-                          {`## 📰 11h
+                        <div className="text-gray-200 leading-relaxed text-lg">
+                          <ReactMarkdown
+                            remarkPlugins={[remarkGfm]}
+                            components={{
+                              h2: ({ node, ...props }) => <h2 className="text-xl font-bold text-white mb-2" {...props} />,
+                              ul: ({ node, ...props }) => <ul className="list-disc list-inside space-y-1" {...props} />,
+                              li: ({ node, ...props }) => <li className="mb-1" {...props} />,
+                              p: ({ node, ...props }) => <p className="mb-2" {...props} />,
+                            }}
+                          >
+                            {`## 📰 11h
 
 - **Nvidia atinge valor histórico**: A empresa se tornou a primeira da história a ultrapassar 4 trilhões de dólares em valor de mercado, consolidando-se como a mais valiosa do mundo e líder na fabricação de GPUs para IA.
 - **Hugging Face lança robô de mesa open-source**: O Reachy Mini, um robô de 299 dólares programável em Python, foi lançado com foco em aplicações de código aberto.
@@ -226,18 +229,24 @@ export default function HomePage() {
 - **Meta adquire 3% da EssilorLuxottica SA**: A Meta investiu 3,5 bilhões de dólares na maior fabricante de óculos do mundo, visando o conhecimento de fabricação e as redes de distribuição para seus óculos inteligentes.
 - **Reino Unido firma parceria com Google Cloud**: O governo britânico busca modernizar sistemas legados no setor público e capacitar servidores em tecnologias digitais e IA, com expectativa de economia.
 `}
-                        </ReactMarkdown>
+                          </ReactMarkdown>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </InViewAnimate>
+
+            {/* Donation Section */}
+            <InViewAnimate delay={1000}>
+              <DonationSection />
+            </InViewAnimate>
           </div>
         </main>
 
         {/* Footer */}
-        <footer className="border-t border-gray-800 py-8">
+        <footer className="border-t border-gray-800 py-8 mt-16">
           <div className="container mx-auto px-4 text-center">
             <InViewAnimate delay={1000}>
               <p className="text-gray-500 text-sm mb-4">Desde 2020-2025</p>
