@@ -252,7 +252,7 @@ export default function HomePage() {
               <p className="text-gray-500 text-sm mb-4">Desde 2020-2025</p>
               <div className="flex justify-center items-center gap-4">
                 <a
-                  href="https://discord.gg/CYCPPPr25z"
+                  href="https://discord.gg/ASFmZ82yeu"
                   className="inline-flex items-center justify-center w-12 h-12 bg-blue-600 rounded-full hover:bg-blue-700 transition-colors duration-300 shadow-lg"
                   aria-label="Link para o perfil do Discord"
                 >
