@@ -95,9 +95,6 @@ export default function HomePage() {
                       <li>
                         <span className="font-bold text-white">Segunda a Sexta:</span> 11h (horário de Brasília).
                       </li>
-                      <li>
-                        <span className="font-bold text-white">Sábados:</span> 13h (horário de Brasília).
-                      </li>
                     </ul>
                   </div>
 
