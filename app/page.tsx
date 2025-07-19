@@ -89,7 +89,7 @@ export default function HomePage() {
                       <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
                         <i className="fas fa-clock text-xl text-white"></i>
                       </div>
-                      <h3 className="text-xl font-bold">Horários de publicação:</h3>
+                      <h3 className="text-xl font-bold">Horário de publicação:</h3>
                     </div>
                     <ul className="list-disc list-inside text-gray-300 space-y-2 pl-2">
                       <li>
