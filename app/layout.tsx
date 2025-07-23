@@ -5,8 +5,18 @@ import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
   title: "Square News - Notícias de Tecnologia",
-  description: "Notícias compactas de tecnologia publicadas voluntariamente",
+  description: "Notícias compactas de tecnologia publicadas voluntariamente.",
   generator: "v0.dev",
+  openGraph: {
+    title: "Square News - Notícias de Tecnologia",
+    description: "Notícias compactas de tecnologia publicadas voluntariamente.",
+    images: [
+      "https://cdn.discordapp.com/banners/1387780583257673798/f21738627ec8d58595e89a08a45cd299?size=512",
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+  },
 }
 
 export default function RootLayout({
